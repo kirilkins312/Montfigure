@@ -1,0 +1,62 @@
+﻿@model NewSHPTH.Data.ViewModels.CreateVM
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>Cloth</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            
+             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Brand" class="control-label"></label>
+                <input asp-for="Brand" class="form-control" />
+                <span asp-validation-for="Brand" class="text-danger"></span>
+            </div>
+            <div>
+                <label asp-for="IMGURL" class="control-label"></label>
+                <input asp-for="IMGURL" class="form-control" />
+                <span asp-validation-for="IMGURL" class="text-danger"></span>
+            </div>
+
+          <div class="form-group">
+                <label asp-for="CloId" class="control-label"></label>
+                <select asp-for="CloId" asp-items="ViewBag.ClothSeparations" class="form-control"></select>
+                <span asp-validation-for="CloId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SizeId" class="control-label"></label>
+                <select asp-for="SizeId" asp-items="ViewBag.SizeSeparations" class="form-control"></select>
+                <span asp-validation-for="SizeId" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="GenSep" class="control-label"></label>
+                <select asp-for="GenSep" asp-items="Html.GetEnumSelectList<GenderSeparation>()" class="form-control"></select>
+                <span asp-validation-for="GenSep" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Price" class="control-label"></label>
+                <input asp-for="Price" class="form-control" />
+                <span asp-validation-for="Price" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="WelcomePage">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

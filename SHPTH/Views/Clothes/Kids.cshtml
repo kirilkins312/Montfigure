@@ -1,0 +1,203 @@
+﻿@model NewSHPTH.Data.ViewModels.ShopVM
+
+
+
+
+
+<div class="main-container">
+    <form class="form-cont" asp-controller="Clothes" asp-action="Kids" method="post">
+        <h1 class="Title">Filters</h1>
+
+
+        <div class="side-part">
+
+            <div class="cont-cat">
+                <div class="list-div">
+                    <h1 class="cat-title">Category</h1>
+                    @foreach (var option in Model.clothSeparations)
+                    {
+                        <div class="list-items">
+                            @{
+                                string cbId = "Option_" + @option.Id;
+                            }
+                            <input asp-for="@option.IsChecked" type="checkbox" value="@option.Id" name="UnikName" id="@option.Id" checked="@option.IsChecked" onclick="onlyOne(this)" />
+                            <label class="cat-item" asp-for="@option.IsChecked">
+                                @option.Name
+                            </label>
+                        </div>
+                    }
+                </div>
+
+
+            </div>
+        </div>
+        <div class="side-part">
+
+            <div class="cont-cat">
+                <div class="list-div">
+                    <h1 class="cat-title">Size</h1>
+                    @foreach (var option in Model.SizeSeparations)
+                    {
+                        <div class="list-items">
+                            @{
+                                string cbId = "PhoneOption_" + @option.id;
+                            }
+                            <input asp-for="@option.IsChecked" type="checkbox" value="@option.id" name="UnikName2" id="@option.id" checked="@option.IsChecked" onclick="onlyOne1(this)" />
+                            <label class="cat-item" asp-for="@option.IsChecked">
+                                @option.Name
+                            </label>
+                        </div>
+                    }
+                </div>
+
+
+            </div>
+        </div>
+
+
+        <div class="side-part-textbox">
+
+            <div class="cont-cat-textbox">
+                <div class="list-div">
+                    <h3>Find by name</h3>
+                    <input name="searchString" type="text" class="form-control" placeholder="Search for a cloth..." aria-label="Recipient's username" aria-describedby="button-addon2">
+
+                </div>
+
+
+            </div>
+        </div>
+
+        <div class="side-part-textbox">
+
+            <div class="cont-cat-textbox">
+                <div class="list-div">
+                    <h3>Filter by price</h3>
+                    <input name="MaxPrice" type="number" class="form-control" placeholder="Write max. price...">
+                    <input name="MinPrice" type="number" class="form-control" placeholder="Write min. price...">
+
+                </div>
+
+
+            </div>
+        </div>
+
+
+
+
+
+
+
+
+
+        <a class="reset" asp-controller="Clothes" asp-action="ResetKids" asp-route-GenSep="3">Reset</a>
+
+
+        <button class="filter-button" type="submit">Filter</button>
+
+
+
+
+
+
+
+
+
+    </form>
+
+
+
+
+    <div class="row">
+
+        <div class="space">
+            <div class="GenSep-title">Kids Clothing</div>
+        </div>
+
+
+        @foreach (var item in Model.CloList)
+        {
+            <div class="prod-container">
+
+                <div class="list-layout">
+
+
+
+                    <div class="image">
+                        <a class="bordernull" asp-controller="Clothes" asp-action="Details" asp-route-id="@item.Id">
+                            <img src="@item.IMGURL" width="100%" alt="@item.Brand" />
+                        </a>
+                    </div>
+
+                    <div>
+                        <div>
+
+                            <div class="prod-name">
+
+
+                                <p>@item.Brand</p>
+
+                                @if (User.IsInRole("Admin"))
+                                {
+
+
+                                    <a class="crud-opt" asp-controller="Clothes" asp-action="Edit" asp-route-id="@item.Id">Edit</a>
+                                    <a class="crud-opt" asp-controller="Clothes" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                                    <a class="crud-opt" asp-controller="Clothes" asp-action="Create">Create</a>
+
+
+
+                                }
+                                <p class="price">
+                                    @item.Price.ToString() Kč
+                                </p>
+
+
+
+                            </div>
+
+                        </div>
+                    </div>
+
+
+
+                </div>
+
+
+            </div>
+        }
+    </div>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+    function onlyOne(checkbox) {
+        var checkboxes = document.getElementsByName('UnikName')
+        checkboxes.forEach((item) => {
+            if (item !== checkbox) item.checked = false
+        })
+    }
+
+
+</script>
+<script>
+    function onlyOne1(checkbox) {
+        var checkboxes = document.getElementsByName('UnikName2')
+        checkboxes.forEach((item) => {
+            if (item !== checkbox) item.checked = false
+        })
+    }
+</script>

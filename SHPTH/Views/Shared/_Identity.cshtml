@@ -1,0 +1,78 @@
+﻿@inject UserManager<ApplicationUser> UserManager
+
+@if (!User.Identity.IsAuthenticated)
+{
+    
+
+    <ul class="navbar-nav " style="width:100%; margin-left:1250px; ">
+        <li class="nav-item">
+
+            <a class="nav-link active a-nav nav-mar" asp-controller="Account" asp-action="Login">
+                <i class="bi bi-box-arrow-in-right">    </i>Log In
+
+            </a>
+        </li>
+        <li class="nav-item">
+
+            <a class="nav-link active a-nav nav-mar" asp-controller="Account" asp-action="Register">
+                <i class="bi bi-person-plus">    </i>Sign Up
+
+            </a>
+        </li>
+
+    </ul>
+
+}
+else
+{
+    <div style="display:flex; ">
+        @*<p style="width:100px;"> Hello @UserManager.GetUserName(User)</p>
+
+
+    <a class="dropdown-item" asp-controller="Orders" asp-action="Index">
+    <i class="bi bi-list"></i> Orders
+    </a>
+
+
+    @if (User.IsInRole("Admin"))
+    {
+
+    <a class="dropdown-item" asp-controller="Account" asp-action="Users">
+    <i class="bi bi-people"></i> Users
+    </a>
+
+    }*@
+
+        <ul class="navbar-nav " style="width:100%; margin-left:870px; ">
+            <li class="nav-item">
+
+                <a class="nav-link active a-nav nav-mar" asp-controller="Orders" asp-action="Index">
+                    <i class="bi bi-list"></i> Orders
+                </a>
+            </li>
+            @if (User.IsInRole("Admin"))
+            {
+                <li class="nav-item">
+
+                <a class="nav-link active a-nav nav-mar" asp-controller="Account" asp-action="Users">
+                    <i class="bi bi-people"></i> Users
+                </a>
+            </li>
+            }
+            <li class="nav-item">
+
+                <form asp-controller="Account" asp-action="Logout">
+                    <button style="border:none; background-color:#f7f7f7; margin-top:7px; margin-left:18px;">
+                        <i class="bi bi-box-arrow-in-right"></i> Log out
+                    </button>
+                </form>
+            </li>
+        </ul>
+
+    </div>
+
+
+    <span style="padding: 5px;"></span>
+
+}
+
